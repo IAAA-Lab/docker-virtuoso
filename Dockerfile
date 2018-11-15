@@ -25,10 +25,10 @@ RUN apk add --update git automake autoconf automake libtool bison flex gawk gper
 ENV PATH /usr/local/virtuoso-opensource/bin/:$PATH
 
 # Copy files
-COPY virtuoso.ini /virtuoso.ini
-COPY dump_nquads_procedure.sql /dump_nquads_procedure.sql
-COPY clean-logs.sh /clean-logs.sh
-COPY virtuoso.sh /virtuoso.sh
+COPY virtuoso/virtuoso.ini /virtuoso.ini
+COPY virtuoso/dump_nquads_procedure.sql /dump_nquads_procedure.sql
+COPY virtuoso/clean-logs.sh /clean-logs.sh
+COPY virtuoso/virtuoso.sh /virtuoso.sh
 
 VOLUME /data
 WORKDIR /data

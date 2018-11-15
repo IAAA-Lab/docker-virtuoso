@@ -9,7 +9,7 @@ services:
       - "1111:1111"
     environment:
       - DBA_PASSWORD=pppp 
-      - SPARQL_UPDATE=true
+      - SPARQL_UPDATE=false
       - DEFAULT_GRAPH=http://www.example.com/my-graph
     volumes:
-      - /home/jorge/jorge/TFG/PruebasDocker/db:/data 
+      - /home/jorge/jorge/TFG/db:/data 

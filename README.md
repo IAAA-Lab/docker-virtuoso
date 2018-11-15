@@ -3,7 +3,7 @@
 <!-- TOC START min:2 max:3 link:true update:true -->
 - [Configuración del servicio](#configuracin-del-servicio)
   - [Docker Compose](#docker-compose)
-- [Lanzamiento](#lanzamiento)
+  - [Lanzamiento](#lanzamiento)
 - [Acceso al servicio](#acceso-al-servicio)
 - [Detención del sistema](#detencin-del-sistema)
 
@@ -14,12 +14,19 @@
 Ficheros:
 
 ```
-clean-logs.sh       docker-compose.yml         explicación.txt
-crearContenedor.sh  Dockerfile                 virtuoso.ini
-crearImagen.sh      dump_nquads_procedure.sql  virtuoso.sh
-
+./
+|-- virtuoso/
+|     |--clean-logs.sh
+|     |--explicación.txt
+|     |--virtuoso.ini
+|     |--virtuoso.sh
+|     |--vdump_nquads_procedure.sql
+|-- docker-compose.yml
+|-- crearContenedor.sh
+|-- crearImagen.sh
+|-- Dockerfile
 ```
-### Configuración de Virtusoso mediante docker
+### Configuración de Virtusoso mediante docker-compose
 El el fichero docker-compose-yml, se puede observar que hay una serie de parametros de entorno, los cuales se pueden cambiar para configurar Virtuoso.
 
 ```yaml
@@ -47,7 +54,7 @@ services:
 
 Uno de los ficheros de configuración de Virtuoso parte de esta carpera, el llamado virtuoso.ini, ahi se puede configurar todo lo que se desee del servicio antes de lanzarlo.
 
-## Lanzamiento
+#### Lanzamiento
 
 Dentro de la carpeta del docker-compose.yml, y tras haberlo configurado a tu gusto:
 
@@ -60,6 +67,7 @@ docker-compose up -d
 También se puede lanzar el servicio sin usar docker-compose, utilizando directamente docker, con los scripts:
 * crearImagen.sh
 * crearContenedor.sh
+Pudiendo reallizar en crearContenedor.sh los mismos cambios que en el docker-compose.
 
 ## Acceso al servicio
 
