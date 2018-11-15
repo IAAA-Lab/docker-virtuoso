@@ -1,0 +1,49 @@
+virtuoso-docker-compose
+
+Para lanzar:
+
+sudo docker-compose up -d
+
+Este docker consta de varios ficheros, de los que cabe destacar los siguientes:
+-Dockerfile: es el fichero de creación de la imagen docker. Este, instala todas las 
+	dependencias necesarias para la instalación de virtuoso.El sistema que se usa 
+	para la instalacion es Alpine. Este instala:
+		+git
+		+automake
+		+autoconf
+		+auutomake
+		+libtool
+		+bison
+		+flex
+		+gawk
+		+gperf
+		+openssl
+		+g++
+		+openssl-dev
+		+make
+		+py-pip
+	Seguido, mediante el sistema gestor de paquetes de python pip, se descargará
+	crudini, que es una herramienta para manejar ficheros y scripts desde python.
+	Se descarga el paquete desde github, puediendo elegir en las variables de entorno
+	cual es la versión deseada de virtuoso. También se eleige donde va a estar ese 
+	directorio, al que cuando acabe la instalación se irá.
+	Se ejecuta el fichero de configuración dentro del sistema de instalación y para
+	finalizar se realiza el make, indicando el numero de trabajos a realizar 
+	simultaneamente mirando el numero de hilos que tiene el procesador.
+	Se realizan enlaces entre carpetas para que los ficheros de configuracion se 
+	queden en la carpeta /data dentro del contenedor.
+	Se copian los ficheros de configuración y se ejecuta virtuoso.sh.
+
+-virtuoso.sh: es un fichero de lanzamiento que coge unos parametros de entorno y los
+	aplica en el sistema. Los parametros son los siguientes:
+		+DBA_PASSWORD: es la contraseña con la que acceder al sistema.
+		+SPARQL_UPDATE: es el permiso de SPARQL_UPDATE (true o false)
+		+DEFAULT_GRAPH
+-virtuoso.ini: fichero de configuración de virtuoso, que si se desea hacer algún 
+cambio dentro de la configuración, se podrá hacer antes de crear la imagen.
+
+
+Para poder cambiar la configuración del servidor virtuoso de docker, se puede hacer 
+desde el fichero docker-compose.yml, en el que se especifican los parametros 
+mencionados antes, asi como los puertos o la carpeta en la que se montará el volumen
+del contenedor.
