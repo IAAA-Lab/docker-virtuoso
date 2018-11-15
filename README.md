@@ -2,8 +2,9 @@
 
 <!-- TOC START min:2 max:3 link:true update:true -->
 - [Configuración del servicio](#configuracin-del-servicio)
-  - [Docker Compose](#docker-compose)
+  - [Configuración de Virtusoso mediante docker-compose](#docker-compose)
   - [Lanzamiento](#lanzamiento)
+- [Configuración sin docker-compose](#configuracin-del-servicio-sin-compose)
 - [Acceso al servicio](#acceso-al-servicio)
 - [Detención del sistema](#detencin-del-sistema)
 
@@ -62,7 +63,7 @@ Dentro de la carpeta del docker-compose.yml, y tras haberlo configurado a tu gus
 docker-compose up -d
 ```
 
-### Otra manera de lanzar sin docker-compose
+### Configuración sin docker-compose
 
 También se puede lanzar el servicio sin usar docker-compose, utilizando directamente docker, con los scripts:
 * crearImagen.sh
