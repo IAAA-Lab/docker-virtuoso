@@ -4,7 +4,6 @@
 - [Configuración del servicio](#configuracin-del-servicio)
   - [Configuración de Virtusoso mediante docker-compose](#docker-compose)
   - [Lanzamiento](#lanzamiento)
-- [Configuración sin docker-compose](#configuracin-del-servicio-sin-compose)
 - [Acceso al servicio](#acceso-al-servicio)
 - [Detención del sistema](#detencin-del-sistema)
 
@@ -16,16 +15,8 @@ Ficheros:
 
 ```
 ./
-|-- virtuoso/
-|     |--clean-logs.sh
-|     |--explicación.txt
-|     |--virtuoso.ini
-|     |--virtuoso.sh
-|     |--vdump_nquads_procedure.sql
 |-- docker-compose.yml
-|-- crearContenedor.sh
-|-- crearImagen.sh
-|-- Dockerfile
+
 ```
 ### Configuración de Virtusoso mediante docker-compose
 El el fichero docker-compose-yml, se puede observar que hay una serie de parametros de entorno, los cuales se pueden cambiar para configurar Virtuoso.
@@ -35,18 +26,17 @@ version: '3'
 
 services:
   virtuoso:
-    build: .
-    container_name: Virtuoso
+    image: tenforce/virtuoso:latest
+    container_name: VirtuosoTenforce
     ports:
       - "8890:8890"
       - "1111:1111"
     environment:
-      - DBA_PASSWORD=yourPasswd 
-      - SPARQL_UPDATE=true
+      - DBA_PASSWORD=yourPass 
+      - SPARQL_UPDATE=false
       - DEFAULT_GRAPH=http://www.example.com/my-graph
     volumes:
-      - /your/own/directory:/data 
-
+        - /PATH:/data 
 ```
 
 * **environment:** se puede configurar la contraseña, la actualización de SPARQL y el grafico por defecto de rdf.
@@ -62,13 +52,6 @@ Dentro de la carpeta del docker-compose.yml, y tras haberlo configurado a tu gus
 ```
 docker-compose up -d
 ```
-
-### Configuración sin docker-compose
-
-También se puede lanzar el servicio sin usar docker-compose, utilizando directamente docker, con los scripts:
-* crearImagen.sh
-* crearContenedor.sh
-Pudiendo reallizar en crearContenedor.sh los mismos cambios que en el docker-compose.
 
 ## Acceso al servicio
 

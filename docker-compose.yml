@@ -2,14 +2,16 @@ version: '3'
 
 services:
   virtuoso:
-    build: .
-    container_name: Virtuoso
+    image: tenforce/virtuoso:latest
+    container_name: VirtuosoTenforce
     ports:
       - "8890:8890"
       - "1111:1111"
     environment:
-      - DBA_PASSWORD=pppp 
+      - DBA_PASSWORD=yourPass 
       - SPARQL_UPDATE=false
       - DEFAULT_GRAPH=http://www.example.com/my-graph
     volumes:
-      - /home/jorge/jorge/TFG/db:/data 
+        - /PATH:/data 
+
+      
