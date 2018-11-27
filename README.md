@@ -40,7 +40,7 @@ services:
 ```
 
 * **environment:** se puede configurar la contraseña, la actualización de SPARQL y el grafico por defecto de rdf.
-* **volumes:** define los puntos de montaje de los ficheros esenciales de virtuoso, para luego poder modificarlos. El fichero más importante es virtuoso.ini, que se explicará a continuación.
+* **volumes:** define los puntos de montaje de los ficheros esenciales de virtuoso, para luego poder modificarlos. Es posible que no se pueda crear el contenedor si no existe el directorio que le indicas, por ello es necesario que se cree antes. **Es importante cambiar donde pone PATH por el directorio donde se quiera montar.** El fichero más importante es virtuoso.ini, que se explicará a continuación.
 * **port:** puertos por los cuales se va a poder acceder al servicio, en este caso, se accede mediante web por el puerto 8890.
 
 Uno de los ficheros de configuración de Virtuoso parte de esta carpera, el llamado virtuoso.ini, ahi se puede configurar todo lo que se desee del servicio antes de lanzarlo.
