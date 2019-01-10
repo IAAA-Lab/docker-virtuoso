@@ -26,7 +26,7 @@ version: '3'
 
 services:
   virtuoso:
-    image: tenforce/virtuoso:latest
+    image: tenforce/virtuoso:virtuoso7.2.5
     container_name: VirtuosoTenforce
     ports:
       - "8890:8890"
