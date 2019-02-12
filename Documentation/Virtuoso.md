@@ -1,12 +1,12 @@
-# Documentación VirtuosoInstalación y uso
+# Documentación Virtuoso: Instalación y uso
 
 <!-- TOC START min:2 max:3 link:true update:true -->
 - [Introducción](#introducción)
-- [Instalación](#instalacion)
+- [Instalación](#instalación)
 - [Acceso a los datos](#acceso-a-los-datos)
   - [JDBC](#jdbc)
   - [Jena](#jena)
-- [Representación de grafos RDF en tablas SQL](#representacion-de-grafos-rdf-en-tablas-sql)
+- [Representación de grafos RDF en tablas SQL](#representación-de-grafos-rdf-en-tablas-sql)
 - [Mapeo de datos SQL a RDF](#mapeo-de-datos-sql-a-rdf)
 
 <!-- TOC END -->
@@ -16,8 +16,11 @@
 
 Virtuoso es un moderno sistema de soluciones para el acceso y almacenamiento de datos, virtualización, integración y acceso multimodelo a tablas relaciones (acceso SQL o grafos RDF).Técnicamente es un middleware y motor de bases de datos híbrido que combina la funcionalidad de las bases de datos relacionales, objeto-relacionales,
 RDF, XML, con aplicación web y sistema de ficheros propio. Permite el acceso a los datos vía SPARQL, ODBC, JDBC, ADO.NET, XMLA, WebDAV y Virtuoso/PL (que es un lenguaje de almacenaje SQL procedural) entre otros.
+
 Gracias a que tienen un servidor web, permite la visualización de los datos, el manejo de ellos, la administración los usuarios (creación, eliminación, permisos...) y la visualización de las consultas realizadas de una manera muy sencilla y optimizada. También funciona como un servicio REST para poder realizar peticiones HTTP sobre los datos. 
+
 En el campo de la web semántica, Virtuoso permite el almacenamiento de datos mediante grafos RDF, SPARQL como lenguaje de consultas con unaintegración con SQl, permite una transformación de datos relacionales como tripletas RDF y el manejo absoluto de estos grafos de manera muy sencilla mediante un servidor web.
+
 ![](Images/introduccion.png)
 
 ## Instalación
@@ -31,6 +34,7 @@ https://github.com/IAAA-Lab/docker-virtuoso. Una vez se tiene, se puede observar
 docker-compose up -d
 ```
 ejecutándolo dentro de la carpeta donde esté el fichero modificado anteriormente. 
+
 Y ya estaría instalado, para acceder su puede hacer mediante el servicio rest en el puerto indicado antes (1111) o mediante el navegador web, introduciendo: http://localhost:8890 si no se ha cambiado el puerto. 
 Para parar el servicio se tiene que ejecutar el siguiente comando en la misma carpeta: 
 ```
@@ -87,15 +91,17 @@ Siendo GraphName el nombre del grafo creado o a crear. Una vez se ha realizado l
 
 ## Representación de grafos RDF en tablas SQL 
 El motor de la base de datosde grafos RDF de Virtuoso guarda todas las tripletas en tablas SQL normales. De tal manera que el IRI (son una generalización de los URIS, que son identificadores universales de los recursos) de cada nodo se guarda en la tabla: DB.DBA.RDF\_IRI, poniendo el nombre y el identificador, IRI. Ejemplo de esta tabla:
+
 |Example3   |  #i1269 |
 |---|---|
+| | |
 
 Siendo #i1269 el IRI. 
 Con estos IRIs se pueden saber las relaciones que hay entre los nodos, desde la tabla DB.DBA.RDF\_QUAD, en la que cada se puede ver todas las tripletas, incluyendo el nombre del grafo, pero en formato de URI. Ejemplo de esta tabla:
 
-|Nombre grafo |Nodo1 |Predicado |Nodo2 |
+|Nombre grafo   |Nodo1   |Predicado   |Nodo2   |
 |---|---|---|---|
-|#i1269 |#i17968904 |#i17968905 |#i17968906 |
+|#i1269   |#i17968904   |#i17968905   |#i17968906   |
 
 
 
@@ -108,13 +114,15 @@ Una de las grandes utilidades que tiene virtuoso es la capacidad de crear un map
 Una vez se ha acabado de configurar como se desee, se pulsa Prepare to Generate, lo que genera una serie de ficheros que se ejecutarán para crear la vista. Ahí se puede elegir el nombre que tendrá el grafo. De tal manera, que al generar el grafo de una tabla SQL, se genera otra tabla SQL, pero con las propiedades RDF nombradas antes. Esta transformación/mapeo crea por cada fila de la tabla primaria una tripleta: id, grafo, nombre del grafo; siendo el id un identificador único creado para esto, y después por cada columna de la tabla otra tripleta: id, nombre columna, dato. de tal manera que quedaría así:
 
 SQL:
-|ArtistID (INTEGER) |CountryCode (VARCHAR) |Name (VARCHAR) |
+
+|ArtistID (INTEGER)   |CountryCode (VARCHAR)   |Name (VARCHAR)   |
 |---|---|---|
-|1 |nl   |RembrandtHarmenszoon van Rijn   |
+|1   |nl   |RembrandtHarmenszoon van Rijn   |
 
 
 RDF:
-|http://localhost:8890/Demo/artist/ArtistID/1\#this |http://www.w3.org/1999/02/22-rdf-syntax-ns\#type   |http://localhost:8890/schemas/Demo/Artist   |
+
+|http://localhost:8890/Demo/artist/ArtistID/1\#this   |http://www.w3.org/1999/02/22-rdf-syntax-ns\#type     |http://localhost:8890/schemas/Demo/Artist   |
 |---|---|---|
 |http://localhost:8890/Demo/artist/ArtistID/1\#this   |http://localhost:8890/schemas/Demo/artistid   |1   |
 |http://localhost:8890/Demo/artist/ArtistID/1\#this   |http://localhost:8890/schemas/Demo/countrycode   |nl   |
